@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_MVC_03_Modele", "ASP_MV
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ASP_MVC_03_Modele.DB", "ASP_MVC_03_Modele.DB\ASP_MVC_03_Modele.DB.sqlproj", "{A3581C5B-D9E8-461E-9785-78197B6D2B8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_MVC_03_Modele.BLL", "ASP_MVC_03_Modele.BLL\ASP_MVC_03_Modele.BLL.csproj", "{08C74FE9-3D57-497B-92B0-BBC56B084E45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_MVC_03_Modele.DAL", "ASP_MVC_03_Modele.DAL\ASP_MVC_03_Modele.DAL.csproj", "{9C7FA417-9147-470E-91B1-2EFA792D29B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{A3581C5B-D9E8-461E-9785-78197B6D2B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3581C5B-D9E8-461E-9785-78197B6D2B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3581C5B-D9E8-461E-9785-78197B6D2B8A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{08C74FE9-3D57-497B-92B0-BBC56B084E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C74FE9-3D57-497B-92B0-BBC56B084E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C74FE9-3D57-497B-92B0-BBC56B084E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C74FE9-3D57-497B-92B0-BBC56B084E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7FA417-9147-470E-91B1-2EFA792D29B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7FA417-9147-470E-91B1-2EFA792D29B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7FA417-9147-470E-91B1-2EFA792D29B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7FA417-9147-470E-91B1-2EFA792D29B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
