@@ -63,4 +63,11 @@
     <Build Include="Tables\Race.sql" />
     <Build Include="Tables\Hero.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Seed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Init_Database.publish.publish.xml" />
+    <None Include="Init_Database.publish.xml" />
+  </ItemGroup>
 </Project>
