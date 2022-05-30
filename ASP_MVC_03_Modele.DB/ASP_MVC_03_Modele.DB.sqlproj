@@ -67,7 +67,6 @@
     <PostDeploy Include="Scripts\Seed.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Init_Database.publish.publish.xml" />
     <None Include="Init_Database.publish.xml" />
   </ItemGroup>
 </Project>
