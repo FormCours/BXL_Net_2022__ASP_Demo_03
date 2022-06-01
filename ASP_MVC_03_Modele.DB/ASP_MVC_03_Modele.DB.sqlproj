@@ -62,6 +62,7 @@
   <ItemGroup>
     <Build Include="Tables\Race.sql" />
     <Build Include="Tables\Hero.sql" />
+    <Build Include="Tables\Biome.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Seed.sql" />
