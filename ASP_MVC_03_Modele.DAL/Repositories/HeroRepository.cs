@@ -18,17 +18,46 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
 
         public override int Insert(HeroEntity entity)
         {
-            throw new NotImplementedException();
+            Command cmd = new Command($"INSERT INTO {TableName} (Name, Endurance, Strength, Id_Race)" +
+                $" OUTPUT inserted.{TableId}" +
+                " VALUES (@Name, @Endurance, @Strength, @Id_Race)");
+
+            cmd.AddParameter("Name", entity.Name);
+            cmd.AddParameter("Endurance", entity.Endurance);
+            cmd.AddParameter("Strength", entity.Strength);
+            cmd.AddParameter("Id_Race", entity.IdRace);
+
+            return (int)_Connection.ExecuteScalar(cmd);
         }
 
         public override bool Update(int id, HeroEntity entity)
         {
-            throw new NotImplementedException();
+            Command cmd = new Command($"UPDATE {TableName}" +
+                " SET Name = @Name," +
+                "     Endurance = @Endurance," +
+                "     Strength = @Strength," +
+                "     Id_Race = @Id_Race" +
+                $" WHERE {TableId} = @Id");
+
+            cmd.AddParameter("Id", id);
+            cmd.AddParameter("Name", entity.Name);
+            cmd.AddParameter("Endurance", entity.Endurance);
+            cmd.AddParameter("Strength", entity.Strength);
+            cmd.AddParameter("Id_Race", entity.IdRace);
+
+            return _Connection.ExecuteNonQuery(cmd) == 1;
         }
 
         protected override HeroEntity MapRecordToEntity(IDataRecord record)
         {
-            throw new NotImplementedException();
+            return new HeroEntity()
+            {
+                IdHero = (int)record[TableId],
+                Name = (string)record["Name"],
+                Endurance = (int)record["Endurance"],
+                Strength = (int)record["Strength"],
+                IdRace = (int)record["Id_Race"]
+            };
         }
     }
 }
