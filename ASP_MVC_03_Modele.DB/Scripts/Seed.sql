@@ -17,3 +17,8 @@ GO
 INSERT INTO [Hero] ([Name], [Endurance], [Strength], [Id_Race])
  VALUES (N'Dominique', 10, 16, 1),
 		(N'Thierry', 18, 10, 2);
+
+-- Lieu (Biome)
+INSERT INTO [Biome] ([Name], [Description], [Difficulty_Level], [Image_Uri])
+ VALUES (N'Durotar', N'Durotar, terre baptisée ainsi en l''honneur du défunt père de Thrall, Durotan, se situe sur la côte orientale de Kalimdor. La région est limitrophe d''Azshara, au nord, et des Tarides du Nord, à l''ouest.', 1, NULL),
+		(N'Reflet-de-Lune', N'Reflet-de-Lune est le refuge des Druides du monde entier. Ici, Taurens, Trolls et Elfes de la Nuit se réunissent pacifiquement pour montrer leur révérence à la Nature.', 2, NULL);
