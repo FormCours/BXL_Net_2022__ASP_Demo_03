@@ -10,16 +10,13 @@ using Tools.Connections;
 
 namespace ASP_MVC_03_Modele.DAL.Repositories
 {
-    public class RaceRepository : IRaceRepository
+    public class RaceRepository : RepositoryBase<int, RaceEntity>, IRaceRepository
     {
-        private Connection _Connection; 
+        public RaceRepository(Connection connection) 
+            : base(connection, "Race", "Id_Race") { }
 
-        public RaceRepository(Connection connection)
-        {
-            _Connection = connection;
-        }
 
-        private RaceEntity MapRecordToRace(IDataRecord record)
+        protected override RaceEntity MapRecordToEntity(IDataRecord record)
         {
             return new RaceEntity()
             {
@@ -30,22 +27,7 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
             };
         }
 
-        public IEnumerable<RaceEntity> GetAll()
-        {
-            Command cmd = new Command("SELECT * FROM Race");
-
-            return _Connection.ExecuteReader(cmd, MapRecordToRace);
-        }
-
-        public RaceEntity GetById(int id)
-        {
-            Command cmd = new Command("SELECT * FROM Race WHERE Id_Race = @Id_Race");
-            cmd.AddParameter("Id_Race", id);
-
-            return _Connection.ExecuteReader(cmd, MapRecordToRace).SingleOrDefault();
-        }
-
-        public int Insert(RaceEntity entity)
+        public override int Insert(RaceEntity entity)
         {
             Command cmd = new Command("INSERT INTO Race (Name, Endurance_Modifier, Strength_Modifier)" +
                 " OUTPUT inserted.Id_Race" +
@@ -57,17 +39,9 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
              return (int)_Connection.ExecuteScalar(cmd);
         }
 
-        public bool Update(int id, RaceEntity entity)
+        public override bool Update(int id, RaceEntity entity)
         {
             throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            Command cmd = new Command("DELETE FROM Race WHERE Id_Race = @Id_Race");
-            cmd.AddParameter("Id_Race", id);
-
-            return _Connection.ExecuteNonQuery(cmd) == 1;
         }
     }
 }

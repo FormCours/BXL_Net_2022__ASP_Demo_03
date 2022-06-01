@@ -2,36 +2,31 @@
 using ASP_MVC_03_Modele.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tools.Connections;
 
 namespace ASP_MVC_03_Modele.DAL.Repositories
 {
-    public class HeroRepository : IHeroRepository
+    public class HeroRepository : RepositoryBase<int, HeroEntity>, IHeroRepository
     {
+        public HeroRepository(Connection connection)
+            : base(connection, "Hero", "Id_Hero")
+        { }
 
-        public IEnumerable<HeroEntity> GetAll()
+        public override int Insert(HeroEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public HeroEntity GetById(int id)
+        public override bool Update(int id, HeroEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public int Insert(HeroEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(int id, HeroEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
+        protected override HeroEntity MapRecordToEntity(IDataRecord record)
         {
             throw new NotImplementedException();
         }
