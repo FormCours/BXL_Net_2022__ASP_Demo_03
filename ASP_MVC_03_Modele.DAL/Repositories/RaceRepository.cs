@@ -41,7 +41,18 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
 
         public override bool Update(int id, RaceEntity entity)
         {
-            throw new NotImplementedException();
+            Command cmd = new Command($"UPDATE Race" +
+                " SET Name = @Name," +
+                "     Endurance_Modifier = @Endurance_Modifier," +
+                "     Strength_Modifier = @Strength_Modifier" +
+                $" WHERE Id_Race = @Id");
+
+            cmd.AddParameter("Id", id);
+            cmd.AddParameter("Name", entity.Name);
+            cmd.AddParameter("Endurance_Modifier", entity.EnduranceModifier);
+            cmd.AddParameter("Strength_Modifier", entity.StrengthModifier);
+
+            return _Connection.ExecuteNonQuery(cmd) == 1;
         }
     }
 }
