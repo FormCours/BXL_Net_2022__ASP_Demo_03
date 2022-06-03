@@ -1,6 +1,16 @@
 ﻿USE [HeroesVsMonster]
 GO
 
+-- Member 
+SET IDENTITY_INSERT [Member] ON;
+GO
+
+INSERT INTO [Member] ([Id_Member], [Pseudo], [Email], [Pwd_Hash])
+ VALUES (1, 'Zaza', 'z.vanderquack@bxl.be', '$argon2id$v=19$m=65536,t=3,p=1$MrIh8vx8466qP4AhXxMV0Q$TuLLgqJ3IJRLmtaPX4VV1vEFAFiUm34VwP+eTFXYn98'); -- Test1234=
+ 
+SET IDENTITY_INSERT [Member] OFF;
+GO
+
 -- Race
 SET IDENTITY_INSERT [Race] ON;
 GO
@@ -14,9 +24,9 @@ SET IDENTITY_INSERT [Race] OFF;
 GO
 
 -- Hero
-INSERT INTO [Hero] ([Name], [Endurance], [Strength], [Id_Race])
- VALUES (N'Dominique', 10, 16, 1),
-		(N'Thierry', 18, 10, 2);
+INSERT INTO [Hero] ([Name], [Endurance], [Strength], [Id_Race], [Id_Member])
+ VALUES (N'Dominique', 10, 16, 1, 1),
+		(N'Thierry', 18, 10, 2, 1);
 
 -- Lieu (Biome)
 INSERT INTO [Biome] ([Name], [Description], [Difficulty_Level], [Image_Uri])
