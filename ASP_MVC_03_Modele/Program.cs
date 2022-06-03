@@ -15,17 +15,21 @@ builder.Services.AddTransient<Connection>((service) =>
 {
     return new Connection(
         SqlClientFactory.Instance,
-        builder.Configuration.GetConnectionString("Tristan")
+        builder.Configuration.GetConnectionString("Default")
     );
 });
 
 // - DAL
-//builder.Services.AddTransient(typeof(IBiomeRepository), typeof(BiomeRepository));
 builder.Services.AddTransient<IBiomeRepository, BiomeRepository>();
+builder.Services.AddTransient<IMemberRepository, MemberRepository>();
 
 // - BLL
-//builder.Services.AddTransient(typeof(BiomeService));
 builder.Services.AddTransient<BiomeService>();
+builder.Services.AddTransient<MemberService>();
+
+// - Ecriture alternative pour l'injection de dépendance 
+//builder.Services.AddTransient(typeof(IBiomeRepository), typeof(BiomeRepository));
+//builder.Services.AddTransient(typeof(BiomeService));
 
 
 var app = builder.Build();

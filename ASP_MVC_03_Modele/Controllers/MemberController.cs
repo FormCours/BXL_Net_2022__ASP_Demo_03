@@ -7,8 +7,6 @@ namespace ASP_MVC_03_Modele.Controllers
 {
     public class MemberController : Controller
     {
-        // TODO Add missing config in injection dependance !
-
         private MemberService memberService;
 
         public MemberController(MemberService memberService)
