@@ -13,5 +13,7 @@ namespace ASP_MVC_03_Modele.DAL.Entities
         public int Endurance { get; set; }
         public int Strength { get; set; }
         public int IdRace { get; set; }
+
+        // TODO Add link with Member (FK !!!)
     }
 }
