@@ -12,5 +12,6 @@ namespace ASP_MVC_03_Modele.DAL.Interfaces
     {
         bool CheckMemberExists(string pseudo, string email);
         string GetPasswordHash(string pseudo);
+        MemberEntity GetByPseudo(string pseudo);
     }
 }

@@ -66,5 +66,13 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
 
             return ((int)_Connection.ExecuteScalar(cmd)) == 1;
         }
+
+        public virtual MemberEntity GetByPseudo(string pseudo)
+        {
+            Command cmd = new Command($"SELECT * FROM {TableName} WHERE Pseudo = @Pseudo");
+            cmd.AddParameter("Pseudo", pseudo);
+
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
+        }
     }
 }

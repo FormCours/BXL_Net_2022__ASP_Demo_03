@@ -44,6 +44,11 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
 
 
         #region Crud
+        public MemberDTO GetByPseudo(string pseudo)
+        {
+            return memberRepository.GetByPseudo(pseudo).ToDTO();
+        }
+
         public bool Delete(int idMember)
         {
             return memberRepository.Delete(idMember);
