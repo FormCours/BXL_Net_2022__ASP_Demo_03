@@ -57,5 +57,14 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
 
             return _Connection.ExecuteScalar(cmd)?.ToString();
         }
+
+        public bool CheckMemberExists(string pseudo, string email)
+        {
+            Command cmd = new Command($"SELECT COUNT(*) FROM {TableName} WHERE Pseudo = @Pseudo OR Email = @email");
+            cmd.AddParameter("Pseudo", pseudo);
+            cmd.AddParameter("Email", email);
+
+            return ((int)_Connection.ExecuteScalar(cmd)) == 1;
+        }
     }
 }

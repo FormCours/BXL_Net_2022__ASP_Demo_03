@@ -27,10 +27,17 @@ namespace ASP_MVC_03_Modele.Controllers
                 return View(memberRegister);
             }
 
-            // TODO Add Check is Email or Pseudo exists 
+            // Check if Member exists
+            if (memberService.CheckMemberExists(memberRegister.Pseudo, memberRegister.Email))
+            {
+                ModelState.AddModelError("", "Le compte existe déjà.");
+                return View(memberRegister);
+            }
 
+            // Hashage du mot de passe
             string pwdHash = Argon2.Hash(memberRegister.Password);
 
+            // Save Member in DB
             memberService.Insert(
                 memberRegister.Pseudo,
                 memberRegister.Email,

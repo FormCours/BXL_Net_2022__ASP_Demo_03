@@ -10,6 +10,7 @@ namespace ASP_MVC_03_Modele.DAL.Interfaces
     public interface IMemberRepository 
         : IRepository<int, MemberEntity>
     {
+        bool CheckMemberExists(string pseudo, string email);
         string GetPasswordHash(string pseudo);
     }
 }
