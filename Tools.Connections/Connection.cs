@@ -31,9 +31,17 @@ namespace Tools.Connections
             {
                 using (DbCommand dbCommand = CreateCommand(dbConnection, command))
                 {
-                    dbConnection.Open();
-                    object? result = dbCommand.ExecuteScalar();
-                    return result is DBNull ? null : result;
+                    try
+                    {
+                        dbConnection.Open();
+                        object? result = dbCommand.ExecuteScalar();
+                        return result is DBNull ? null : result;
+                    }
+                    catch (Exception ex)
+                    {
+                        //log the error
+                        return null;
+                    }
                 }
             }
         }

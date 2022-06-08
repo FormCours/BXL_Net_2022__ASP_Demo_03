@@ -27,7 +27,9 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
             cmd.AddParameter("Strength", entity.Strength);
             cmd.AddParameter("Id_Race", entity.IdRace);
 
-            return (int)_Connection.ExecuteScalar(cmd);
+            int? rep = (int?)_Connection.ExecuteScalar(cmd);
+
+            return rep ?? -1;
         }
 
         public override bool Update(int id, HeroEntity entity)

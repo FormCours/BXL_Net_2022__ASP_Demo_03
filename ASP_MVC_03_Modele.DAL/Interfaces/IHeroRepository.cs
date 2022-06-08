@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 namespace ASP_MVC_03_Modele.DAL.Interfaces
 {
     public interface IHeroRepository : IRepository<int, HeroEntity>
-    { }
+    {
+      
+    }
 }
