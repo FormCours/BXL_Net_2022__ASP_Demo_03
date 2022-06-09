@@ -44,4 +44,16 @@ namespace ASP_MVC_03_Modele.Models
         [Compare(nameof(Password))]
         public string PasswordConfirm { get; set; }
     }
+
+    public class MemberLogin
+    {
+        [DisplayName("Pseudo")]
+        [Required]
+        public string Pseudo { get; set; }
+
+        [DisplayName("Mot de passe")]
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
 }

@@ -18,7 +18,7 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
             this.memberRepository = memberRepository;
         }
 
-        // Créer un compte
+        #region Register & Login
         public MemberDTO Insert(string pseudo, string email, string pwdHash)
         {
             int id = memberRepository.Insert(new DAL.Entities.MemberEntity
@@ -31,16 +31,28 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
             return memberRepository.GetById(id).ToDTO();
         }
 
-        // Se loguer
         public string? GetPasswordHash(string pseudo)
         {
             return memberRepository.GetPasswordHash(pseudo);
         }
 
-        // Supprimer un compte
+        public bool CheckMemberExists(string pseudo, string email)
+        {
+            return memberRepository.CheckMemberExists(pseudo, email);
+        }
+        #endregion
+
+
+        #region Crud
+        public MemberDTO GetByPseudo(string pseudo)
+        {
+            return memberRepository.GetByPseudo(pseudo).ToDTO();
+        }
+
         public bool Delete(int idMember)
         {
             return memberRepository.Delete(idMember);
         }
+        #endregion
     }
 }

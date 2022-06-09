@@ -57,5 +57,22 @@ namespace ASP_MVC_03_Modele.DAL.Repositories
 
             return _Connection.ExecuteScalar(cmd)?.ToString();
         }
+
+        public bool CheckMemberExists(string pseudo, string email)
+        {
+            Command cmd = new Command($"SELECT COUNT(*) FROM {TableName} WHERE Pseudo = @Pseudo OR Email = @email");
+            cmd.AddParameter("Pseudo", pseudo);
+            cmd.AddParameter("Email", email);
+
+            return ((int)_Connection.ExecuteScalar(cmd)) == 1;
+        }
+
+        public virtual MemberEntity GetByPseudo(string pseudo)
+        {
+            Command cmd = new Command($"SELECT * FROM {TableName} WHERE Pseudo = @Pseudo");
+            cmd.AddParameter("Pseudo", pseudo);
+
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
+        }
     }
 }
