@@ -33,7 +33,7 @@ namespace WEB_API_Heroes.Test.Fakes
 
         public IEnumerable<HeroDTO> GetByName(string name)
         {
-            throw new NotImplementedException();
+            return _heroes.Where(m => m.Name == name);
         }
 
         public bool Insert(HeroDTO H)
