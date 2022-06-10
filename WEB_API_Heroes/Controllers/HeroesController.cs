@@ -57,9 +57,11 @@ namespace WEB_API_Heroes.Controllers
         [HttpPut]
         [Route("{id:int}")]
         public IActionResult ModifyHero(int id,HeroApiModel monHero)
-        {
-             //1- vérification
-             if(id!=monHero.IdHero)
+        { 
+             if(monHero.Endurance<450) return new BadRequestObjectResult(new { Hero = monHero, Reason = "Le héro doit avoir plus de 450 d'endurance" });
+
+            //1- vérification
+            if (id!=monHero.IdHero)
             {
                 return new BadRequestObjectResult(new { Hero = monHero, Reason="Les ids ne correspondent pas" });
             }

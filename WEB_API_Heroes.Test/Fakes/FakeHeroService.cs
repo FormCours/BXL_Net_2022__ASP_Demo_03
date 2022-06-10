@@ -28,7 +28,7 @@ namespace WEB_API_Heroes.Test.Fakes
 
         public HeroDTO GetById(int id)
         {
-            throw new NotImplementedException();
+            return _heroes.SingleOrDefault(m => m.IdHero == id);
         }
 
         public IEnumerable<HeroDTO> GetByName(string name)
@@ -38,7 +38,12 @@ namespace WEB_API_Heroes.Test.Fakes
 
         public bool Insert(HeroDTO H)
         {
-            throw new NotImplementedException();
+            HeroDTO current = _heroes.FirstOrDefault(h => h.IdHero == H.IdHero);
+            if (current != null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool Update(int id, HeroDTO H)
