@@ -10,8 +10,8 @@ namespace WEB_API_Heroes.Controllers
     [ApiController]
     public class HeroesController : ControllerBase
     {
-        HeroService _service;
-        public HeroesController(HeroService service)
+        IHeroService _service;
+        public HeroesController(IHeroService service)
         {
             this._service = service;
         }

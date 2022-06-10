@@ -27,7 +27,7 @@ builder.Services.AddTransient<Connection>((service) =>
 builder.Services.AddTransient<IHeroRepository, HeroRepository>();
 
 // - BLL 
-builder.Services.AddTransient<HeroService>();
+builder.Services.AddTransient<IHeroService,HeroService>();
 
 var app = builder.Build();
 

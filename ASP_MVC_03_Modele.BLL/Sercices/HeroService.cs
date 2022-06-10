@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ASP_MVC_03_Modele.BLL.Sercices
 {
-    public class HeroService
+    public class HeroService : IHeroService
     {
         private IHeroRepository heroRepository;
         public HeroService(IHeroRepository repo)
@@ -19,7 +19,7 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
 
         public IEnumerable<HeroDTO> GetAll()
         {
-            
+
             return heroRepository.GetAll().Select(b => b.ToDTO());
         }
 
@@ -28,7 +28,7 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
             return heroRepository.GetAll().Where(m => m.Name.ToLower().Contains(name)).Select(b => b.ToDTO());
         }
 
-        public  HeroDTO GetById(int id)
+        public HeroDTO GetById(int id)
         {
             return heroRepository.GetById(id).ToDTO();
         }
