@@ -6,13 +6,15 @@ namespace WEB_API_Heroes.Test
 {
     [TestClass]
     public class HeroControllerTest
-    {
+    { 
+
         [TestMethod]
         public void Get_Test()
         {
         }
 
-        [TestMethod]
+        [TestMethod("Mon test pour les récupérer tous")]
+        [Description("Test permettant de vérifier que je récupère tous les héros")]
         public void GetAll_Test()
         {
             //Arrange
