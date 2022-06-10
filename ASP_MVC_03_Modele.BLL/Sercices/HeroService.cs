@@ -19,12 +19,18 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
 
         public IEnumerable<HeroDTO> GetAll()
         {
+            
             return heroRepository.GetAll().Select(b => b.ToDTO());
         }
 
         public IEnumerable<HeroDTO> GetByName(string name)
-        {
+        {//Version feignasse ==> On devrait prévoir la méthode dans le repo
             return heroRepository.GetAll().Where(m => m.Name.ToLower().Contains(name)).Select(b => b.ToDTO());
+        }
+
+        public  HeroDTO GetById(int id)
+        {
+            return heroRepository.GetById(id).ToDTO();
         }
 
         public IEnumerable<HeroDTO> GetByEndurance(int endu)
@@ -35,6 +41,11 @@ namespace ASP_MVC_03_Modele.BLL.Sercices
         public bool Insert(HeroDTO H)
         {
             return heroRepository.Insert(H.ToEntity()) > 0;
+        }
+
+        public bool Update(int id, HeroDTO H)
+        {
+            return heroRepository.Update(id, H.ToEntity());
         }
     }
 }

@@ -3,24 +3,24 @@ using ASP_MVC_03_Modele.DAL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WEB_API_Heroes.Mappers;
-
+using WEB_API_Heroes.Models;
 namespace WEB_API_Heroes.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class HeroesController : ControllerBase
     {
-        HeroService _repo;
-        public HeroesController(HeroService repo)
+        HeroService _service;
+        public HeroesController(HeroService service)
         {
-            this._repo = repo;
+            this._service = service;
         }
         [HttpGet]
         public IActionResult Get()
         {
              //renvoie une 200 + json
 
-            return Ok(_repo.GetAll().ToArray());
+            return Ok(_service.GetAll().ToArray());
         }
 
         [HttpGet]
@@ -29,7 +29,7 @@ namespace WEB_API_Heroes.Controllers
         {
             //renvoie une 200 + json
 
-            return Ok(_repo.GetByName(name).Select(m => m.ToApi()));
+            return Ok(_service.GetByName(name).Select(m => m.ToApi()));
         }
 
         [HttpGet()]
@@ -38,20 +38,46 @@ namespace WEB_API_Heroes.Controllers
         {
             //renvoie une 200 + json
 
-            return Ok(_repo.GetByEndurance(endurance).Select(m => m.ToApi()));
+            return Ok(_service.GetByEndurance(endurance).Select(m => m.ToApi()));
         }
 
         [HttpPost]
-        public IActionResult AddHero(WEB_API_Heroes.Models.HeroApiModel monHero)
+        public IActionResult AddHero(HeroApiModel monHero)
         {
-            if(_repo.Insert(monHero.ToDto()))
+            if(_service.Insert(monHero.ToDto()))
             {
-                return Ok(monHero);
+                return new CreatedResult("/api/Heroes", monHero);
             }
             else
             {
                 return new BadRequestObjectResult(monHero);
             }
+        }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult ModifyHero(int id,HeroApiModel monHero)
+        {
+             //1- vérification
+             if(id!=monHero.IdHero)
+            {
+                return new BadRequestObjectResult(new { Hero = monHero, Reason="Les ids ne correspondent pas" });
+            }
+            HeroApiModel FromDb = _service.GetById(id).ToApi();
+            if(FromDb == null)
+            {
+                return new BadRequestObjectResult(new { Hero = monHero, Reason = "Le héro n'existe pas" });
+            }
+
+           if(_service.Update(id, monHero.ToDto()))
+            {
+                return NoContent();
+            }
+            else
+            {
+                return new BadRequestObjectResult(monHero);
+            }
+
         }
     }
 }
