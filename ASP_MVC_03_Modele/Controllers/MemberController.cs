@@ -1,7 +1,6 @@
 ﻿using ASP_MVC_03_Modele.BLL.Sercices;
 using ASP_MVC_03_Modele.Models;
 using ASP_MVC_03_Modele.Models.Mappers;
-using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_MVC_03_Modele.Controllers
@@ -36,14 +35,11 @@ namespace ASP_MVC_03_Modele.Controllers
                 return View(memberRegister);
             }
 
-            // Hashage du mot de passe
-            string pwdHash = Argon2.Hash(memberRegister.Password);
-
             // Save Member in DB
             Member member = memberService.Insert(
                 memberRegister.Pseudo,
                 memberRegister.Email,
-                pwdHash
+                memberRegister.Password
             ).ToModel();
 
             // TODO Store Member in Session
@@ -66,23 +62,18 @@ namespace ASP_MVC_03_Modele.Controllers
                 return View(memberLogin);
             }
 
-            // Récuperation du hashage du mot de passe
-            string? pwdHash = memberService.GetPasswordHash(memberLogin.Pseudo);
-            if(pwdHash is null)
-            {
-                ModelState.AddModelError("", "Les credentials ne sont pas valide");
-                return View(memberLogin);
-            }
-
-            // Validation du hashage du mot de passe
-            if(!Argon2.Verify(pwdHash, memberLogin.Password))
-            {
-                ModelState.AddModelError("", "Les credentials ne sont pas valide");
-                return View(memberLogin);
-            }
-
             // Récuperation du compte via son pseudo
-            Member member = memberService.GetByPseudo(memberLogin.Pseudo).ToModel();
+            Member? member = memberService.GetByCredentials(
+                memberLogin.Pseudo,
+                memberLogin.Password
+            )?.ToModel();
+
+            // Envoi d'une erreur si le compte ne peut pas être récuperé
+            if (member is null)
+            {
+                ModelState.AddModelError("", "Les credentials ne sont pas valide");
+                return View(memberLogin);
+            }
 
             // TODO Store Member in Session
             Console.WriteLine($"Member login with id {member.IdMember}");

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Isopoh.Cryptography.Argon2" Version="1.1.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ASP_MVC_03_Modele.DAL\ASP_MVC_03_Modele.DAL.csproj" />
   </ItemGroup>
 
