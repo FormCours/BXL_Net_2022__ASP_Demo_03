@@ -1,6 +1,7 @@
 using ASP_MVC_03_Modele.BLL.Sercices;
 using ASP_MVC_03_Modele.DAL.Interfaces;
 using ASP_MVC_03_Modele.DAL.Repositories;
+using ASP_MVC_03_Modele.Helpers;
 using System.Data.SqlClient;
 using Tools.Connections;
 
@@ -31,6 +32,11 @@ builder.Services.AddTransient<MemberService>();
 //builder.Services.AddTransient(typeof(IBiomeRepository), typeof(BiomeRepository));
 //builder.Services.AddTransient(typeof(BiomeService));
 
+// Add session
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddScoped<SessionManager>();
 
 var app = builder.Build();
 
@@ -39,6 +45,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+app.UseSession();
+
 app.UseStaticFiles();
 
 app.UseRouting();

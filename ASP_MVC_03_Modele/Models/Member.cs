@@ -56,4 +56,11 @@ namespace ASP_MVC_03_Modele.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
+
+    public class MemberSession
+    {
+        public int IdMember { get; set; }
+        public string Pseudo { get; set; }
+        public string Email { get; set; }
+    }
 }

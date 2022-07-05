@@ -1,4 +1,5 @@
 ﻿using ASP_MVC_03_Modele.BLL.Sercices;
+using ASP_MVC_03_Modele.Helpers;
 using ASP_MVC_03_Modele.Models;
 using ASP_MVC_03_Modele.Models.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace ASP_MVC_03_Modele.Controllers
     public class MemberController : Controller
     {
         private MemberService memberService;
+        private SessionManager sessionManager;
 
-        public MemberController(MemberService memberService)
+        public MemberController(MemberService memberService, SessionManager sessionManager)
         {
             this.memberService = memberService;
+            this.sessionManager = sessionManager;
         }
 
         public IActionResult Register()
@@ -42,7 +45,8 @@ namespace ASP_MVC_03_Modele.Controllers
                 memberRegister.Password
             ).ToModel();
 
-            // TODO Store Member in Session
+            // Store Member in Session
+            sessionManager.Login(member);
             Console.WriteLine($"Member create with id {member.IdMember}");
 
             return RedirectToAction("Index", "Home");
@@ -75,8 +79,17 @@ namespace ASP_MVC_03_Modele.Controllers
                 return View(memberLogin);
             }
 
-            // TODO Store Member in Session
+            // Store Member in Session
+            sessionManager.Login(member); 
             Console.WriteLine($"Member login with id {member.IdMember}");
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Logout()
+        {
+            // Clear session
+            sessionManager.Logout();
 
             return RedirectToAction("Index", "Home");
         }
